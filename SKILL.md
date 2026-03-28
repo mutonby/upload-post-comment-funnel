@@ -77,6 +77,11 @@ Parameters:
 
 Returns a `monitor_id` you'll need for managing the monitor.
 
+**Limits:**
+- Maximum 2 new monitors per profile per day
+- No duplicate monitors on the same post URL
+- Monitors auto-stop after **15 days**
+
 **Important**: This monitor sends a fixed `reply_message` — it does not do semantic filtering or personalization. If `trigger_keywords` is set, it only replies to comments containing those words (case and accent insensitive). If omitted, it replies to ALL commenters. For smart semantic filtering, use one-shot mode instead.
 
 #### Check Monitor Status
