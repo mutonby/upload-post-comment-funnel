@@ -44,13 +44,13 @@ Copy `SKILL.md` and `references/` to your agent's skills directory.
 
 Tell your AI agent:
 
-> "In my latest Reel I told people to comment CURSO to get info about my course. Set up a funnel to DM them the enrollment link https://mycourse.com/enroll"
+> "Set up a comment funnel on https://instagram.com/p/ABC123 — anyone who comments CURSO gets a DM with the enrollment link https://mycourse.com/enroll"
 
 The agent will:
-1. Find your latest Reel
-2. Scan comments for people requesting the course
-3. Send each one a personalized DM with the link
-4. Report how many DMs were sent
+1. Start a persistent monitor on that post
+2. Filter comments containing "curso" (case and accent insensitive)
+3. Send each matching commenter a DM with the link
+4. Keep monitoring every 15 minutes, auto-stops after 15 days
 
 ## Compliance
 
