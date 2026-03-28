@@ -63,7 +63,8 @@ curl -X POST "https://api.upload-post.com/api/uploadposts/autodms/start" \
     "post_url": "https://www.instagram.com/p/ABC123/",
     "reply_message": "Hey! Here is your guide: https://example.com/guide",
     "profile_username": "PROFILE",
-    "monitoring_interval": 15
+    "monitoring_interval": 15,
+    "trigger_keywords": ["guide", "link"]
   }'
 ```
 
@@ -72,10 +73,11 @@ Parameters:
 - `reply_message` (required): The DM message to send to matching commenters
 - `profile_username` (required): Upload-Post profile name with Instagram connected
 - `monitoring_interval` (optional): Minutes between checks. Default: 15. Minimum: 15 (values below 15 are auto-clamped)
+- `trigger_keywords` (optional): Array of keywords to filter comments. Only comments containing at least one keyword receive a DM. Case-insensitive and accent-insensitive ("guía" matches "guia"). If omitted, ALL commenters receive a DM.
 
 Returns a `monitor_id` you'll need for managing the monitor.
 
-**Important**: This monitor sends a fixed `reply_message` to ALL new commenters — it does not do semantic filtering or personalization. That's the trade-off for 24/7 automation. If the user wants smart filtering, use one-shot mode instead.
+**Important**: This monitor sends a fixed `reply_message` — it does not do semantic filtering or personalization. If `trigger_keywords` is set, it only replies to comments containing those words (case and accent insensitive). If omitted, it replies to ALL commenters. For smart semantic filtering, use one-shot mode instead.
 
 #### Check Monitor Status
 
@@ -246,7 +248,7 @@ To manage it:
 - `POST /uploadposts/autodms/stop` → deactivate
 - `POST /uploadposts/autodms/delete` → remove permanently
 
-**Trade-off**: The persistent monitor sends the same message to ALL commenters. It does not do semantic filtering or personalization — it replies to every new comment. This is fine when the post clearly says "comment X to get Y" and you expect all comments to be trigger comments.
+**Trade-off**: The persistent monitor sends the same fixed message — no personalization per commenter. Use `trigger_keywords` to filter so only relevant comments get a DM. Without keywords, it replies to every new comment.
 
 ### Path B: One-Shot with AI (Smart Filtering)
 
